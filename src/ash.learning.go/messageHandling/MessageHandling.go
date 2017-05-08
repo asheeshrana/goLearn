@@ -1,4 +1,4 @@
-package errorHandling
+package messageHandling
 
 //Message defined as a constant
 
@@ -13,6 +13,9 @@ const NoMessageFound = 1002
 
 //UnableToLoadConfiguration indicates that the configuration couldn't be loaded
 const UnableToLoadConfiguration = 1003
+
+//UnableToStartListener indicates that the listener couldn't be started
+const UnableToStartListener = 1004
 
 //SeverityDebug represents debug messages
 const SeverityDebug = 1
@@ -57,6 +60,11 @@ var messageMap = map[int]MessageDetails{
 		severity: SeverityFatal,
 		message:  "Unable to load configuration",
 	},
+	UnableToStartListener: MessageDetails{
+		code:     UnableToStartListener,
+		severity: SeverityFatal,
+		message:  "Unable to start listener",
+	},
 }
 
 /*GetMessageDetails Handles messages by
@@ -67,10 +75,6 @@ func GetMessageDetails(messageCode int) MessageDetails {
 	var messageDetails MessageDetails
 	var ok bool
 	if messageDetails, ok = messageMap[messageCode]; ok {
-
-		if messageDetails.severity == SeverityFatal {
-			panic(messageDetails)
-		}
 		return messageDetails
 	}
 	return messageMap[NoMessageFound]

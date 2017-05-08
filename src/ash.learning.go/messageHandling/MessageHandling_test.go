@@ -1,4 +1,4 @@
-package errorHandling
+package messageHandling
 
 import (
 	"testing"
@@ -20,18 +20,4 @@ func TestValidMessageId(t *testing.T) {
 	if msgDetails.code != TestMessage && msgDetails.message != "This is a test message" {
 		t.Fail()
 	}
-}
-
-//TestMessageSeverityFatal tests that the panic is sent
-func TestMessageSeverityFatal(t *testing.T) {
-	defer func() {
-		if r := recover(); r != nil {
-			t.Logf("Received panic as expected: %v", r)
-		} else {
-			t.Fail()
-		}
-	}()
-
-	//Send invalid message
-	GetMessageDetails(UnableToLoadConfiguration)
 }

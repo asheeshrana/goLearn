@@ -2,10 +2,9 @@ package configuration
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 
-	"ash.learning.go/errorHandling"
+	"ash.learning.go/messageHandling"
 )
 
 //Config represents the configuration type
@@ -25,11 +24,10 @@ type serverParams struct {
 func LoadConfiguration(fullConfigFileName string) Config {
 	raw, err := ioutil.ReadFile(fullConfigFileName)
 	if err != nil {
-		msgDetails := errorHandling.GetMessageDetails(errorHandling.UnableToLoadConfiguration)
+		msgDetails := messageHandling.GetMessageDetails(messageHandling.UnableToLoadConfiguration)
 		panic(msgDetails)
 	}
 	json.Unmarshal(raw, &configuration)
-	fmt.Printf("Configuration = %v", configuration)
 	return configuration
 }
 

@@ -1,8 +1,12 @@
 package main
 
 import (
+	"io/ioutil"
+	"os"
+
 	"ash.learning.go/configuration"
 	"ash.learning.go/hello"
+	"ash.learning.go/log"
 	"ash.learning.go/simulator/server"
 )
 
@@ -15,6 +19,8 @@ func main() {
 
 	//Initialize configuration
 	//configuration.LoadConfiguration(args[1])
+
+	log.Init(ioutil.Discard, os.Stdout, os.Stdout, os.Stderr)
 
 	configuration.LoadConfiguration("C:/Asheesh/temp/golearn/configuration.txt")
 

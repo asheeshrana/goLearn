@@ -12,27 +12,29 @@ import (
 	"ash.learning.go/messageHandling"
 )
 
+//ServeMultiplexer Can be used to add your handlers
+var ServeMultiplexer = http.NewServeMux()
+
 //StartServer starts the http server and waits for requests in the specified port
 func StartServer() {
 	var configuration = configuration.GetConfiguration()
 	var ipAddress = configuration.ServerParams.IPAddress
 	var port = configuration.ServerParams.Port
-	serverMux := http.NewServeMux()
 	var listener net.Listener
 	var err error
 
-	serverMux.HandleFunc("/", a)
+	ServeMultiplexer.HandleFunc("/", a)
 	fmt.Printf("Port = %v\n", strconv.Itoa(port))
-	//log.Info.Print("port = " + ":" + strconv.Itoa(port))
+	log.Info.Print("port = " + ":" + strconv.Itoa(port))
 
 	listener, err = net.Listen("tcp", ipAddress+":"+strconv.Itoa(port))
 	if err != nil {
-		//var msgDetails = messageHandling.GetMessageDetails(messageHandling.UnableToStartListener)
-		//log.Error.Println(msgDetails)
+		var msgDetails = messageHandling.GetMessageDetails(messageHandling.UnableToStartListener)
+		log.Error.Println(msgDetails)
 		panic(err)
 	}
 
-	err = http.Serve(listener, serverMux)
+	err = http.Serve(listener, ServeMultiplexer)
 	if err != nil {
 		var msgDetails = messageHandling.GetMessageDetails(messageHandling.UnableToStartListener)
 		log.Error.Println(msgDetails)

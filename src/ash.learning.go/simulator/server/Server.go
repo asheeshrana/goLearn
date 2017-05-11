@@ -22,8 +22,6 @@ func StartServer() {
 	var port = configuration.ServerParams.Port
 	var listener net.Listener
 	var err error
-
-	ServeMultiplexer.HandleFunc("/", a)
 	fmt.Printf("Port = %v\n", strconv.Itoa(port))
 	log.Info.Print("port = " + ":" + strconv.Itoa(port))
 

@@ -10,6 +10,7 @@ import (
 //Config represents the configuration type
 type Config struct {
 	ServerParams serverParams
+	TemplatesDir string
 }
 
 //configuration represents the configuration object to be used within the project

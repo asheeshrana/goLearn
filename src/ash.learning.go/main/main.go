@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 
@@ -32,7 +33,9 @@ func initConfig() {
 
 	//Initialize configuration
 	//configuration.LoadConfiguration(args[1])
-	configuration.LoadConfiguration("C:/Asheesh/temp/golearn/configuration.txt")
+	var config = configuration.LoadConfiguration("C:/Asheesh/temp/golearn/configuration.txt")
+
+	fmt.Println("Templates directory = " + config.TemplatesDir)
 
 }
 
